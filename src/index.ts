@@ -4,3 +4,5 @@
 export * from './types'
 export * from './registry'
 export * from './portal'
+export * from './event-emitter'
+export * from './overlay-ref'
