@@ -2,3 +2,4 @@
 // Core entry point (v1)
 
 export * from './types'
+export * from './registry'
