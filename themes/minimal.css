@@ -1,0 +1,103 @@
+/*
+ * kobiowu — minimal theme
+ * Near-unstyled. Provides only essential structure (box-sizing, overflow,
+ * basic focus ring) so consumers can fully own the visual design.
+ * Import: import 'kobiowu/themes/minimal.css'
+ */
+
+/* ── Reset / base ─────────────────────────────────────────────────────────── */
+
+[data-kb-overlay],
+[data-kb-content] {
+  box-sizing: border-box;
+}
+
+/* ── Focus ring ───────────────────────────────────────────────────────────── */
+
+[data-kb-overlay]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ── Modal ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="modal"] {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+[data-kb-content="modal"] {
+  background: #fff;
+  border-radius: 4px;
+  padding: 1.5rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="toast"] {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  min-width: 240px;
+  max-width: 400px;
+}
+
+/* ── Drawer ───────────────────────────────────────────────────────────────── */
+
+[data-kb-content="drawer"] {
+  background: #fff;
+}
+
+/* ── Alert ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="alert"] {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-kb-content="alert"] {
+  background: #fff;
+  border-radius: 4px;
+  padding: 1.5rem;
+  max-width: 420px;
+}
+
+/* ── Sheet ────────────────────────────────────────────────────────────────── */
+
+[data-kb-content="sheet"] {
+  background: #fff;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ── Spotlight ────────────────────────────────────────────────────────────── */
+
+[data-kb-content="spotlight"] {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 600px;
+  max-width: 90vw;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="tooltip"] {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* ── Popover ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="popover"] {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem;
+}

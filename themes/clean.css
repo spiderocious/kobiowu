@@ -1,0 +1,177 @@
+/*
+ * kobiowu — clean theme
+ * Polished default UI with modern aesthetics, shadows, and transitions.
+ * Import: import 'kobiowu/themes/clean.css'
+ */
+
+/* ── CSS custom properties ────────────────────────────────────────────────── */
+
+:root {
+  --kb-radius:        8px;
+  --kb-radius-lg:     12px;
+  --kb-radius-sm:     4px;
+  --kb-shadow:        0 4px 24px rgba(0, 0, 0, 0.12);
+  --kb-shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.18);
+  --kb-backdrop:      rgba(0, 0, 0, 0.45);
+  --kb-surface:       #ffffff;
+  --kb-surface-dim:   #f8f8f8;
+  --kb-text:          #111111;
+  --kb-text-muted:    #6b7280;
+  --kb-border:        rgba(0, 0, 0, 0.08);
+  --kb-accent:        #3b82f6;
+  --kb-danger:        #ef4444;
+  --kb-success:       #22c55e;
+  --kb-warning:       #f59e0b;
+  --kb-info:          #06b6d4;
+  --kb-duration:      200ms;
+  --kb-easing:        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay],
+[data-kb-content] {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* ── Focus ring ───────────────────────────────────────────────────────────── */
+
+[data-kb-overlay]:focus-visible,
+[data-kb-content]:focus-visible {
+  outline: 2px solid var(--kb-accent);
+  outline-offset: 2px;
+}
+
+/* ── Modal ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="modal"] {
+  background: var(--kb-backdrop);
+  transition: background var(--kb-duration) ease;
+}
+
+[data-kb-content="modal"] {
+  background: var(--kb-surface);
+  border-radius: var(--kb-radius-lg);
+  box-shadow: var(--kb-shadow-lg);
+  padding: 2rem;
+  max-width: min(560px, 90vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  color: var(--kb-text);
+}
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="toast"] {
+  position: relative;
+  overflow: hidden;
+  background: #1c1c1e;
+  color: #ffffff;
+  border-radius: var(--kb-radius);
+  box-shadow: var(--kb-shadow);
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  min-width: 260px;
+  max-width: 420px;
+}
+
+[data-kb-overlay="toast"][data-kb-toast-type="success"] { border-left: 3px solid var(--kb-success); }
+[data-kb-overlay="toast"][data-kb-toast-type="error"]   { border-left: 3px solid var(--kb-danger); }
+[data-kb-overlay="toast"][data-kb-toast-type="warning"] { border-left: 3px solid var(--kb-warning); }
+[data-kb-overlay="toast"][data-kb-toast-type="info"]    { border-left: 3px solid var(--kb-info); }
+
+[data-kb-toast-progress] {
+  border-radius: 0 0 var(--kb-radius) var(--kb-radius);
+  opacity: 0.35;
+}
+
+/* ── Drawer ───────────────────────────────────────────────────────────────── */
+
+[data-kb-content="drawer"] {
+  background: var(--kb-surface);
+  box-shadow: var(--kb-shadow-lg);
+  color: var(--kb-text);
+}
+
+[data-kb-overlay="drawer"][data-kb-drawer-side="left"]   [data-kb-content="drawer"] { border-radius: 0 var(--kb-radius-lg) var(--kb-radius-lg) 0; }
+[data-kb-overlay="drawer"][data-kb-drawer-side="right"]  [data-kb-content="drawer"] { border-radius: var(--kb-radius-lg) 0 0 var(--kb-radius-lg); }
+[data-kb-overlay="drawer"][data-kb-drawer-side="top"]    [data-kb-content="drawer"] { border-radius: 0 0 var(--kb-radius-lg) var(--kb-radius-lg); }
+[data-kb-overlay="drawer"][data-kb-drawer-side="bottom"] [data-kb-content="drawer"] { border-radius: var(--kb-radius-lg) var(--kb-radius-lg) 0 0; }
+
+/* ── Alert ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="alert"] {
+  background: var(--kb-backdrop);
+}
+
+[data-kb-content="alert"] {
+  background: var(--kb-surface);
+  border-radius: var(--kb-radius-lg);
+  box-shadow: var(--kb-shadow-lg);
+  padding: 1.75rem 2rem;
+  max-width: 440px;
+  width: 100%;
+  color: var(--kb-text);
+}
+
+[data-kb-overlay="alert"][data-kb-alert-type="destructive"] [data-kb-content="alert"] {
+  border-top: 3px solid var(--kb-danger);
+}
+
+/* ── Sheet ────────────────────────────────────────────────────────────────── */
+
+[data-kb-content="sheet"] {
+  background: var(--kb-surface);
+  border-radius: var(--kb-radius-lg) var(--kb-radius-lg) 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+  color: var(--kb-text);
+
+  /* Drag handle indicator */
+  background-image: linear-gradient(to right, var(--kb-border) 32px, transparent 0);
+  background-repeat: no-repeat;
+  background-position: center 10px;
+  background-size: 40px 4px;
+  padding-top: 1.5rem;
+}
+
+/* ── Spotlight ────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="spotlight"] {
+  padding: 1rem;
+}
+
+[data-kb-content="spotlight"] {
+  background: var(--kb-surface);
+  border-radius: var(--kb-radius-lg);
+  box-shadow: var(--kb-shadow-lg);
+  width: 640px;
+  max-width: 90vw;
+  color: var(--kb-text);
+  overflow: hidden;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="tooltip"] {
+  background: #1c1c1e;
+  color: #ffffff;
+  border-radius: var(--kb-radius-sm);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Popover ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="popover"] {
+  background: var(--kb-surface);
+  border-radius: var(--kb-radius);
+  box-shadow: var(--kb-shadow);
+  border: 1px solid var(--kb-border);
+  padding: 0.75rem;
+  color: var(--kb-text);
+}

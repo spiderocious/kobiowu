@@ -1,0 +1,164 @@
+/*
+ * kobiowu — shadcn/ui-compatible theme
+ * Uses shadcn/ui CSS variable naming conventions so kobiowu overlays
+ * automatically inherit the app's shadcn design tokens.
+ *
+ * Requires shadcn/ui's base CSS variables to be present:
+ *   --background, --foreground, --card, --card-foreground,
+ *   --popover, --popover-foreground, --primary, --primary-foreground,
+ *   --secondary, --secondary-foreground, --muted, --muted-foreground,
+ *   --accent, --accent-foreground, --destructive, --destructive-foreground,
+ *   --border, --input, --ring, --radius
+ *
+ * Import: import 'kobiowu/themes/shadcn.css'
+ */
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay],
+[data-kb-content] {
+  box-sizing: border-box;
+  font-family: inherit;
+  color: hsl(var(--foreground));
+}
+
+/* ── Focus ring (matches shadcn ring style) ───────────────────────────────── */
+
+[data-kb-overlay]:focus-visible,
+[data-kb-content]:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* ── Modal ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="modal"] {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-kb-content="modal"] {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  padding: 1.5rem;
+  max-width: min(512px, 90vw);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="toast"] {
+  position: relative;
+  overflow: hidden;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  min-width: 260px;
+  max-width: 420px;
+}
+
+[data-kb-overlay="toast"][data-kb-toast-type="destructive"],
+[data-kb-overlay="toast"][data-kb-toast-type="error"] {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+  border-color: hsl(var(--destructive));
+}
+
+[data-kb-toast-progress] {
+  background: hsl(var(--primary));
+  opacity: 0.5;
+}
+
+/* ── Drawer ───────────────────────────────────────────────────────────────── */
+
+[data-kb-content="drawer"] {
+  background: hsl(var(--background));
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+[data-kb-overlay="drawer"][data-kb-drawer-side="left"]   [data-kb-content="drawer"] { border-right: 1px solid hsl(var(--border)); }
+[data-kb-overlay="drawer"][data-kb-drawer-side="right"]  [data-kb-content="drawer"] { border-left: 1px solid hsl(var(--border)); }
+[data-kb-overlay="drawer"][data-kb-drawer-side="top"]    [data-kb-content="drawer"] { border-bottom: 1px solid hsl(var(--border)); }
+[data-kb-overlay="drawer"][data-kb-drawer-side="bottom"] [data-kb-content="drawer"] { border-top: 1px solid hsl(var(--border)); }
+
+/* ── Alert ────────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="alert"] {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-kb-content="alert"] {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  padding: 1.5rem;
+  max-width: 440px;
+  width: 100%;
+  color: hsl(var(--foreground));
+}
+
+[data-kb-overlay="alert"][data-kb-alert-type="destructive"] [data-kb-content="alert"] {
+  border-color: hsl(var(--destructive));
+}
+
+/* ── Sheet ────────────────────────────────────────────────────────────────── */
+
+[data-kb-content="sheet"] {
+  background: hsl(var(--background));
+  border-top: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 4px) calc(var(--radius) + 4px) 0 0;
+  color: hsl(var(--foreground));
+  padding-top: 1.5rem;
+}
+
+/* ── Spotlight ────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="spotlight"] {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-kb-content="spotlight"] {
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  width: 640px;
+  max-width: 90vw;
+  overflow: hidden;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="tooltip"] {
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* ── Popover ──────────────────────────────────────────────────────────────── */
+
+[data-kb-overlay="popover"] {
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+}
