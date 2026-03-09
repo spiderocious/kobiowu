@@ -1,5 +1,5 @@
-import type { OverlayType } from './types'
-import { DEFAULT_Z_INDEX } from './portal'
+import type { OverlayType } from '../types'
+import { DEFAULT_Z_INDEX } from '../portal'
 
 // ─── Stack entry ──────────────────────────────────────────────────────────────
 

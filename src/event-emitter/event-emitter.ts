@@ -1,4 +1,4 @@
-import type { OverlayEvent } from './types'
+import type { OverlayEvent } from '../types'
 
 type Handler = (...args: unknown[]) => void
 

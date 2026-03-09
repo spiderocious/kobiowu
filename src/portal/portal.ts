@@ -1,4 +1,4 @@
-import type { OverlayType, KobiowuConfig } from './types'
+import type { OverlayType, KobiowuConfig } from '../types'
 
 // ─── Default z-index bases ────────────────────────────────────────────────────
 

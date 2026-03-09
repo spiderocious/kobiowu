@@ -1,4 +1,4 @@
-import type { BackdropType, OverlayOptions } from './types'
+import type { BackdropType, OverlayOptions } from '../types'
 
 // ─── Backdrop element ─────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import type { OverlayRef, OverlayType, OverlayFilter } from './types'
+import type { OverlayRef, OverlayType, OverlayFilter } from '../types'
 
 // ─── ID generation ────────────────────────────────────────────────────────────
 

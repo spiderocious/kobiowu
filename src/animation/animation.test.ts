@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { animateEnter, animateExit, mountedHide, mountedShow, ENTER_KEYFRAMES, EXIT_KEYFRAMES } from './animation'
-import type { AnimationConfig } from './types'
+import type { AnimationConfig } from '../types'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

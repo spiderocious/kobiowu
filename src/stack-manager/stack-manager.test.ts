@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { StackManager } from './stack-manager'
-import { DEFAULT_Z_INDEX } from './portal'
+import { DEFAULT_Z_INDEX } from '../portal'
 
 function makeElement(): HTMLElement {
   return document.createElement('div')

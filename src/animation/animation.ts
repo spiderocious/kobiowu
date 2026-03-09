@@ -1,4 +1,4 @@
-import type { AnimationValue, AnimationConfig, AnimationPreset } from './types'
+import type { AnimationValue, AnimationConfig, AnimationPreset } from '../types'
 
 // ─── Preset keyframes ─────────────────────────────────────────────────────────
 

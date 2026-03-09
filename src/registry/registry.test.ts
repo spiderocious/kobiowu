@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { OverlayRegistry, generateId } from './registry'
-import type { OverlayRef, OverlayType } from './types'
+import type { OverlayRef, OverlayType } from '../types'
 
 function makeRef(overrides: Partial<OverlayRef> & { id: string; type: OverlayType; _group?: string }): OverlayRef {
   return {

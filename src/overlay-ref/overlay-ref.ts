@@ -7,8 +7,8 @@ import type {
   Component,
   ToastType,
   XY,
-} from './types'
-import { EventEmitter } from './event-emitter'
+} from '../types'
+import { EventEmitter } from '../event-emitter'
 
 export interface BaseOverlayRefInit {
   id: string
