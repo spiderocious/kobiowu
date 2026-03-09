@@ -79,6 +79,13 @@ export function trapFocus(container: HTMLElement): () => void {
 let _lockCount = 0
 let _savedScrollbarWidth = 0
 
+/** For tests — reset the scroll lock counter and DOM state. */
+export function _resetScrollLock(): void {
+  _lockCount = 0
+  document.body.style.removeProperty('overflow')
+  document.body.style.removeProperty('padding-right')
+}
+
 /**
  * Prevents body scroll. Reference-counted so multiple overlays can lock
  * simultaneously without double-unlocking.
