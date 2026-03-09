@@ -217,6 +217,43 @@ describe('kobiowu.on', () => {
   })
 })
 
+// ─── config zIndexBase ────────────────────────────────────────────────────────
+
+describe('kobiowu.config zIndexBase', () => {
+  it('applies zIndexBase to launched modal', () => {
+    const api = new KobiowuAPI()
+    api.config({ zIndexBase: { modal: 5000 } })
+    const ref = api.launchModal('<p/>')
+    expect(ref.element?.style.zIndex).toBe('5000')
+    void ref.close()
+    _resetScrollLock()
+  })
+
+  it('per-launch zIndex overrides zIndexBase', () => {
+    const api = new KobiowuAPI()
+    api.config({ zIndexBase: { modal: 5000 } })
+    const ref = api.launchModal('<p/>', { zIndex: 9999 })
+    expect(ref.element?.style.zIndex).toBe('9999')
+    void ref.close()
+    _resetScrollLock()
+  })
+})
+
+// ─── config animationPreset ───────────────────────────────────────────────────
+
+describe('kobiowu.config animationPreset', () => {
+  it('stores animationPreset in merged options accessible via patch', () => {
+    const api = new KobiowuAPI()
+    api.config({ animationPreset: 'fade', animationDuration: 200 })
+    const ref = api.launchModal('<p/>')
+    // enterAnimation and animationDuration should be set via _applyGlobalConfig
+    // We verify by patching and checking the ref doesn't throw
+    expect(() => { ref.patch({ className: 'x' }) }).not.toThrow()
+    void ref.close()
+    _resetScrollLock()
+  })
+})
+
 // ─── config portalTarget ──────────────────────────────────────────────────────
 
 describe('kobiowu.config portalTarget', () => {

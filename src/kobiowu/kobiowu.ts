@@ -61,7 +61,9 @@ class KobiowuAPI {
 
   launchModal(component: Component, options: ModalOptions = {}): OverlayRef {
     const id = options.id ?? generateId('modal')
-    const merged: ModalOptions = { ...this._config.defaults?.modal, ...options, id }
+    const merged: ModalOptions = this._applyGlobalConfig('modal', {
+      ...this._config.defaults?.modal, ...options, id,
+    }) as ModalOptions
 
     if (merged.singleton) {
       const existing = this._registry.get(id)
@@ -70,6 +72,7 @@ class KobiowuAPI {
 
     const parent = this._resolveTarget()
     const { wrapper, content, destroy: mountDestroy } = mountModal(component, parent, merged)
+    if (merged.zIndex !== undefined) wrapper.style.zIndex = String(merged.zIndex)
 
     let escapeCleanup: (() => void) | null = null
 
@@ -102,7 +105,9 @@ class KobiowuAPI {
 
   launchToast(component: Component, options: ToastOptions = {}): OverlayRef {
     const id = options.id ?? generateId('toast')
-    const merged: ToastOptions = { ...this._config.defaults?.toast, ...options, id }
+    const merged: ToastOptions = this._applyGlobalConfig('toast', {
+      ...this._config.defaults?.toast, ...options, id,
+    }) as ToastOptions
     const ariaLive = this._config.ariaLive
 
     // ref is assigned after mountToast; auto-close callback fires asynchronously
@@ -146,10 +151,13 @@ class KobiowuAPI {
 
   launchDrawer(component: Component, options: DrawerOptions = {}): OverlayRef {
     const id = options.id ?? generateId('drawer')
-    const merged: DrawerOptions = { ...this._config.defaults?.drawer, ...options, id }
+    const merged: DrawerOptions = this._applyGlobalConfig('drawer', {
+      ...this._config.defaults?.drawer, ...options, id,
+    }) as DrawerOptions
 
     const parent = this._resolveTarget()
     const { wrapper, content, destroy: mountDestroy } = mountDrawer(component, parent, merged)
+    if (merged.zIndex !== undefined) wrapper.style.zIndex = String(merged.zIndex)
 
     let escapeCleanup: (() => void) | null = null
 
@@ -182,10 +190,13 @@ class KobiowuAPI {
 
   launchAlert(component: Component, options: AlertOptions = {}): OverlayRef {
     const id = options.id ?? generateId('alert')
-    const merged: AlertOptions = { ...this._config.defaults?.alert, ...options, id }
+    const merged: AlertOptions = this._applyGlobalConfig('alert', {
+      ...this._config.defaults?.alert, ...options, id,
+    }) as AlertOptions
 
     const parent = this._resolveTarget()
     const { wrapper, content, destroy: mountDestroy } = mountAlert(component, parent, merged)
+    if (merged.zIndex !== undefined) wrapper.style.zIndex = String(merged.zIndex)
 
     const ref = this._makeRef({
       id,
@@ -215,6 +226,7 @@ class KobiowuAPI {
 
     const parent = this._resolveTarget()
     const { wrapper, content, destroy: mountDestroy } = mountSheet(component, parent, merged)
+    if (merged.zIndex !== undefined) wrapper.style.zIndex = String(merged.zIndex)
 
     let escapeCleanup: (() => void) | null = null
 
@@ -288,6 +300,34 @@ class KobiowuAPI {
     for (const handler of set) {
       handler(...args)
     }
+  }
+
+  /**
+   * Applies global config defaults (zIndexBase, animationPreset, animationDuration)
+   * to the per-launch merged options. Per-launch options always win.
+   */
+  private _applyGlobalConfig(type: OverlayType, options: OverlayOptions): OverlayOptions {
+    const cfg = this._config
+    const result: OverlayOptions = { ...options }
+
+    // z-index base per type
+    if (result.zIndex === undefined && cfg.zIndexBase) {
+      const base = (cfg.zIndexBase as Record<string, number | undefined>)[type]
+      if (base !== undefined) result.zIndex = base
+    }
+
+    // Animation preset / duration
+    if (result.enterAnimation === undefined && cfg.animationPreset !== undefined) {
+      result.enterAnimation = cfg.animationPreset
+    }
+    if (result.exitAnimation === undefined && cfg.animationPreset !== undefined) {
+      result.exitAnimation = cfg.animationPreset
+    }
+    if (result.animationDuration === undefined && cfg.animationDuration !== undefined) {
+      result.animationDuration = cfg.animationDuration
+    }
+
+    return result
   }
 
   private _resolveTarget(): HTMLElement {
